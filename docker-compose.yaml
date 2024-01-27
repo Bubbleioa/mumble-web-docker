@@ -1,0 +1,25 @@
+version: '3.3'
+
+services:
+  mumble-server:
+    image: mumblevoip/mumble-server:latest
+    container_name: mumble-server
+    hostname: mumble-server
+    restart: on-failure
+    environment:
+       MUMBLE_CONFIG_SERVER_PASSWORD: "mypassword" # 服务器密码
+       MUMBLE_CONFIG_WELCOME_TEXT: "Howdy Ya'll This is a Mumble Server" # 进入服务器时提示信息
+       MUMBLE_CONFIG_USERS: "100" # 服务器最大人数
+       MUMBLE_CONFIG_BANDWIDTH: "128000" # 服务器带宽
+    ports:
+      - "64738:64738"
+      - "64738:64738/udp"
+    volumes:
+      - ./mumble-data:/data
+
+  mumble-web-proxy:
+    image: bubbleioa/mumble-web-proxy:v0.1.1
+    container_name: mumble-web-proxy
+    environment:
+      - ICE_IPV4=172.24.212.68 # 服务器的公网ip
+    network_mode: host
