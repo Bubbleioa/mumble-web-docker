@@ -10,6 +10,14 @@ mumble 全平台部署脚本，[mumble](https://www.mumble.info/downloads/) 本�
 ## quick start
 
 > 要求系统已经安装 docker 和 docker-compose
+> docker 的安装方法请参考[官方文档](https://docs.docker.com/engine/install/)
+
+```shell
+git clone https://github.com/Bubbleioa/mumble-web-docker.git
+cd mumble-web-docker
+```
+
+或者你也可以下载本仓库的压缩包然后在服务器上解压。
 
 ### 配置修改
 
@@ -52,6 +60,14 @@ sudo docker-compose up -d
 
 mumble 的配置文件在 ./mumble-data/mumble_server_config.ini，具体配置请看[官方文档](https://wiki.mumble.info/wiki/Murmur.ini)
 
-## mumble 用法介绍
+## mumble web 用法介绍
 
+目前除了 iOS 都有对应的客户端，除非需要自己编译，均可以[前往官网下载](https://www.mumble.info/downloads/)。
 
+网页端功能基本上就是桌面端的一个子集，可以自行摸索。
+
+比较方便的一个功能是连接预填选项，例如：
+
+https://yoursite/?username=myfrind&channelName=abcd%2Fsub_channel&token=kirakira
+
+我们可以在 url 指定三个参数，username 是名字，channelName 是你频道的路径，比如我们现在是在 Root->abcd->sub_channel,那么就忽略 Root, 直接写成 abcd/sub_channel, 但是斜杠在 url 里面要变成 %2f，token 是你的令牌。
